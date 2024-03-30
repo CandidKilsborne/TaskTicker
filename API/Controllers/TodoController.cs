@@ -1,12 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using API.Data;
+using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class TodoController : ControllerBase
 {
-    public class TodoController
+    private readonly ApplicationDbContext _context;
+
+    public TodoController(ApplicationDbContext context)
     {
-        
+        _context = context;
     }
 }

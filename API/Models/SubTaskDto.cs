@@ -1,12 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API.Entities;
+namespace API.Models;
 
-public class Todo : ITask
+public class SubTaskDto
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     [MaxLength(250)]
@@ -19,10 +16,8 @@ public class Todo : ITask
 
     public bool IsCompleted { get; set; } = false;
 
-    public ICollection<SubTask> SubTasks { get; set; } = new List<SubTask>();
-
-    public Todo(string title)
+    public void Complete()
     {
-        Title = title;
+        throw new NotImplementedException();
     }
 }

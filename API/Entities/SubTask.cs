@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities;
 
-public class Todo : ITask
+public class SubTask : ITask
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,9 +19,11 @@ public class Todo : ITask
 
     public bool IsCompleted { get; set; } = false;
 
-    public ICollection<SubTask> SubTasks { get; set; } = new List<SubTask>();
+    [ForeignKey("TodoId")]
+    public Todo? Todo { get; set; }
+    public int TodoId { get; set; }
 
-    public Todo(string title)
+    public SubTask(string title)
     {
         Title = title;
     }

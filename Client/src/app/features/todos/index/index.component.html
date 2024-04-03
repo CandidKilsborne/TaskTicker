@@ -1,0 +1,36 @@
+<!-- <app-create-todo></app-create-todo> -->
+
+<div class="section-container">
+  <div class="loading" *ngIf="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <div *ngIf="!loading">
+    <div class="container m-auto p-4">
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h1 class="block text-gray-700 text-xl font-bold mb-2">Task Ticker</h1>
+
+        <ul class="list-reset">
+          <li class="mb-2" *ngFor="let todo of todos$ | async">
+            <div class="flex items-center">
+              <input type="checkbox" class="mr-2" />
+              <span class="text-gray-800">{{ todo.title }}</span>
+            </div>
+            <ul class="list-inside ml-6">
+              <li *ngFor="let subTask of todo.subTasks">
+                <div class="flex items-center">
+                  <input type="checkbox" class="mr-2" />
+                  <span class="text-gray-600">{{ subTask.title }}</span>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <button mat-fab color="primary" aria-label="New Todo" (click)="goToCreate()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

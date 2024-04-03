@@ -1,0 +1,70 @@
+<!-- <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Todo</mat-label>
+    <input matInput formControlName="title" placeholder="Enter a task">
+  </mat-form-field>
+
+  <div formArrayName="subtasks">
+    <div *ngFor="let subtask of subtasks().controls; let i=index">
+      <mat-form-field appearance="fill">
+        <input matInput [formControlName]="i" placeholder="Enter a subtask">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit">Add Todo</button>
+</form> -->
+<div class="container mt-8">
+  <form class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+
+    <!-- Title -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="taskTitle">
+        Title
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="taskTitle" type="text" placeholder="Enter task name" name="title" formControlName="title">
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="details">
+        Details
+      </label>
+      <textarea
+        class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="details" placeholder="Enter task details" name="details" formControlName="details"></textarea>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="task-date">
+        Date
+      </label>
+      <input
+        class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="task-date" type="date" placeholder="Select date">
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="subtasks">
+        Subtasks
+      </label>
+      <textarea
+        class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="subtasks" placeholder="Enter subtasks"></textarea>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <button
+        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit">
+        Create Task
+      </button>
+    </div>
+  </form>
+</div>

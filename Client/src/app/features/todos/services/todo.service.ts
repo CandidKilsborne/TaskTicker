@@ -30,21 +30,18 @@ export class TodoService {
     return this.http.post<TodoCreation>(url, todo, httpOptions);
   }
 
-  // updateTodo(id: number, updatedTodo: Todo): void {
-  //   const index = this.todos.findIndex((t) => t.id === id);
-  //   if (index !== -1) {
-  //     this.todos[index] = updatedTodo;
-  //   }
-  // }
+  updateTodo(id: number, updatedTodo: Todo): Observable<Todo> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.put<Todo>(url, updatedTodo, httpOptions);
+  }
 
-  // deleteTodo(id: number): void {
-  //   this.todos = this.todos.filter((t) => t.id !== id);
-  // }
+  deleteTodo(id: number): Observable<Object> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.delete(url, httpOptions);
+  }
 
-  // toggleCompletion(id: number): void {
-  //   const index = this.todos.findIndex((t) => t.id === id);
-  //   if (index !== -1) {
-  //     this.todos[index].completed = !this.todos[index].completed;
-  //   }
-  // }
+  updateTodoStatus(id: number, isCompleted: boolean): Observable<Todo> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.put<Todo>(url, { isCompleted }, httpOptions);
+  }
 }

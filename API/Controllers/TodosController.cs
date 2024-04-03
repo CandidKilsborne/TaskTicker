@@ -39,27 +39,49 @@ public class TodosController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<TodoDto>> CreateTodo([FromBody] TodoCreationDto todoDto)
+    public async Task<ActionResult<TodoDto>> CreateTodo([FromBody] TodoCreationDto todoCreationDto)
     {
         var nextId = (await _repository.GetTodosAsync()).Max(t => t.Id) + 1;
-        var todo = _mapper.Map<Todo>(todoDto);
+        var todo = _mapper.Map<Todo>(todoCreationDto);
 
         await _repository.CreateTodoAsync(todo);
 
         return CreatedAtRoute("GetTodo", new { id = nextId }, todo);
     }
 
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> UpdateTodo(int id, [FromBody] TodoDto todoDto)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateTodo(int id, [FromBody] TodoUpdateDto todoDto)
+    {
+        var todo = await _repository.GetTodoAsync(id);
+        if (todo == null)
+        {
+            return NotFound();
+        }
+
+        todo = _mapper.Map<Todo>(todoDto);
+        await _repository.UpdateTodoAsync(todo);
+
+        return NoContent();
+    }
+
+    // [HttpPatch("{id}")]
+    // public async Task<IActionResult> PartiallyUpdateTodo(int id, [FromBody] JsonPatchDocument<TodoDto> patchDocument)
     // {
     //     var todo = await _repository.GetTodoAsync(id);
-
     //     if (todo == null)
     //     {
     //         return NotFound();
     //     }
 
-    //     _mapper.Map(todoDto, todo);
+    //     var todoToPatch = _mapper.Map<TodoDto>(todo);
+    //     patchDocument.ApplyTo(todoToPatch, ModelState);
+
+    //     if (!TryValidateModel(todoToPatch))
+    //     {
+    //         return ValidationProblem(ModelState);
+    //     }
+
+    //     _mapper.Map(todoToPatch, todo);
     //     await _repository.UpdateTodoAsync(todo);
 
     //     return NoContent();

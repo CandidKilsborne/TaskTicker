@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -34,7 +34,8 @@ import { Router } from '@angular/router';
 })
 export class IndexComponent implements OnInit {
   loading: boolean = false;
-  todos$?: Observable<Todo[]>;
+  private todosSubject = new BehaviorSubject<Todo[]>([]);
+  todos$?: Observable<Todo[]> = this.todosSubject.asObservable();
 
   constructor(private todoService: TodoService, private router: Router) {}
 
@@ -46,6 +47,13 @@ export class IndexComponent implements OnInit {
       this.todos$ = of(res);
       this.loading = false;
     });
+  }
+
+  onToggleTodo(todo: Todo): void {
+    // console.log('Updated todos:', updatedTodos);
+    // const todo = updatedTodos.find((todo) => todo.id === id) as Todo;
+    console.log('Updated todo:', todo);
+    this.todoService.updateTodo(todo.id, todo).subscribe();
   }
 
   goToCreate() {

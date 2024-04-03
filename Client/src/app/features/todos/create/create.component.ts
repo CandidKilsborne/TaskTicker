@@ -65,11 +65,6 @@ export class CreateComponent implements OnInit {
 
   onSubmit() {
     console.log('Form submitted ', this.todoForm.value);
-    // this.router.navigate(['todos']);
-    // if (this.todoForm.valid) {
-    //   console.log(this.todoForm.value);
-    //   // Handle the form submission logic here
-    // }
     this.todoService.addTodo(this.todoForm.value).subscribe((res) => {
       console.log('Todo created:', res);
       this.router.navigate(['todos']);

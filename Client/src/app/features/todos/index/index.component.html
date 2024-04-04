@@ -7,19 +7,86 @@
 
   <div *ngIf="!loading">
 
-    <div class="container m-auto p-4">
-      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h1 class="block text-gray-700 text-xl font-bold mb-2">Task Ticker</h1>
+    <div class="container p-4 m-auto">
+      <div class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
+        <h1 class="block mb-2 text-xl font-bold text-gray-700">Task Ticker</h1>
+        <div class="flex justify-end">
+          <button mat-fab color="primary" aria-label="New Todo" (click)="goToCreate()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
 
-        <ul class="list-reset">
+        <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          <li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow"
+            *ngFor="let todo of todos$ | async">
+            <div class="flex items-center justify-between w-full p-6 space-x-6">
+              <div class="flex-1 truncate">
+                <div class="flex items-center space-x-3">
+                  <h3 class="text-sm font-medium text-gray-900 truncate">{{ todo.title }}</h3>
+                  <span
+                    class="inline-flex flex-shrink-0 items-center rounded-full bg-red-50 px-1.5 py-0.5 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Overdue</span>
+                </div>
+                <p class="mt-1 text-sm text-gray-500 truncate">{{ todo.details }}</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="flex-shrink-0 w-10 h-10 rounded-full">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+            </div>
+            <div>
+              <div class="flex -mt-px divide-x divide-gray-200">
+                <div class="flex flex-1 w-0 -ml-px">
+                  <a href="#"
+                    class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-semibold text-gray-900 border border-transparent rounded-br-lg gap-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" class="w-5 h-5 text-gray-400">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                    </svg>
+
+                    Details
+                  </a>
+                </div>
+                <div class="flex flex-1 w-0">
+                  <a href="#"
+                    class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-semibold text-gray-900 border border-transparent rounded-bl-lg gap-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" class="w-5 h-5 text-gray-400">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                    </svg>
+
+                    Edit
+                  </a>
+                </div>
+                <div class="flex flex-1 w-0 -ml-px">
+                  <a href="#"
+                    class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-semibold text-gray-900 border border-transparent rounded-br-lg gap-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" class="w-5 h-5 text-gray-400">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg>
+
+                    Delete
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <!-- <ul class="list-reset">
           <li class="mb-4" *ngFor="let todo of todos$ | async">
             <div class="flex items-center h-6">
               <input type="checkbox" [checked]="todo.isCompleted" (click)="onToggleTodo(todo)"
-                class="mr-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                class="w-4 h-4 mr-2 text-indigo-600 border-gray-300 rounded focus:ring-indigo-600"
                 title="todo complete" />
-              <span class="text-gray-800 text-lg">{{ todo.title }}</span>
+              <span class="text-lg text-gray-800">{{ todo.title }}</span>
             </div>
-            <ul class="list-inside ml-6 mt-2">
+            <ul class="mt-2 ml-6 list-inside">
               <li *ngFor="let subTask of todo.subTasks">
                 <div class="flex items-center">
                   <input type="checkbox" class="mr-2" title="subtask complete" />
@@ -27,14 +94,14 @@
                 </div>
               </li>
             </ul>
+            <input type="text" class="w-1/2 p-2 mt-2 ml-6 border rounded" placeholder="Add subtask" />
+            <span>
+              <button mat-icon-button color="primary">
+                <mat-icon>add</mat-icon>
+              </button>
+            </span>
           </li>
-        </ul>
-      </div>
-
-      <div class="flex justify-end">
-        <button mat-fab color="primary" aria-label="New Todo" (click)="goToCreate()">
-          <mat-icon>add</mat-icon>
-        </button>
+        </ul> -->
       </div>
     </div>
   </div>

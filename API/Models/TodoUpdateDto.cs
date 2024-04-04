@@ -4,8 +4,6 @@ namespace API.Models;
 
 public class TodoUpdateDto
 {
-    public int Id { get; set; }
-
     [MaxLength(250)]
     public string? Title { get; set; }
 

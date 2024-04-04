@@ -50,7 +50,7 @@ public class TodosController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateTodo(int id, [FromBody] TodoUpdateDto todoDto)
+    public async Task<IActionResult> UpdateTodo(int id, [FromBody] TodoUpdateDto todoUpdateDto)
     {
         var todo = await _repository.GetTodoAsync(id);
         if (todo == null)
@@ -58,7 +58,7 @@ public class TodosController : ControllerBase
             return NotFound();
         }
 
-        todo = _mapper.Map<Todo>(todoDto);
+        _mapper.Map(todoUpdateDto, todo);
         await _repository.UpdateTodoAsync(todo);
 
         return NoContent();

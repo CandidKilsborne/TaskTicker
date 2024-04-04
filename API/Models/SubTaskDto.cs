@@ -15,9 +15,4 @@ public class SubTaskDto
     public DateTime? DueDate { get; set; }
 
     public bool IsCompleted { get; set; } = false;
-
-    public void Complete()
-    {
-        throw new NotImplementedException();
-    }
 }

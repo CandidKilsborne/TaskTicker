@@ -10,6 +10,7 @@ public class InMemoryTaskRepository : ITaskRepository
         {
             Id = 1,
             IsCompleted = false,
+            Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eros in cursus turpis massa tincidunt dui ut ornare. Vitae congue mauris rhoncus aenean. Mauris nunc congue nisi vitae. Purus in massa tempor nec feugiat nisl pretium fusce. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Arcu cursus vitae congue mauris rhoncus aenean vel. Leo duis ut diam quam. Dictum at tempor commodo ullamcorper a lacus vestibulum sed. Tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras. Ullamcorper sit amet risus nullam eget felis eget nunc. Integer vitae justo eget magna fermentum iaculis.",
             DueDate = DateTime.Now.AddDays(7),
             SubTasks = new List<SubTask>
             {

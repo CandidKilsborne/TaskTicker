@@ -10,5 +10,6 @@ public class SubTaskProfile : Profile
     {
         CreateMap<SubTask, SubTaskDto>();
         CreateMap<SubTaskCreationDto, SubTask>();
+        CreateMap<SubTaskUpdateDto, SubTask>();
     }
 }
